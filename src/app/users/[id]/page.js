@@ -1,9 +1,16 @@
 import React, { Suspense } from 'react'
 import { fetchUser } from '../../../../utils/users'
 import Post from './posts'
+
+export const generateMetadata =async({params})=> {
+    const user = await fetchUser(params.id)
+    return {title:`${user.name}'s profile `}
+}
+
+
 export default async function page({ params }) {
 
-    console.log(params.id)
+    // console.log(params.id)
     const user = await fetchUser(params.id)
     return (
         <div>
