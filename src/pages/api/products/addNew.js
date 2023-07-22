@@ -4,7 +4,9 @@ const { default: connectDb } = require("../../../../utils/Db")
 export default async function addProduct(req, res) {
 
     const { name, category, price } = req.body
-
+    if (req.method !== 'POST') {
+        res.status(500).send({ success: false, message: "only Post method is  allowed" })
+    } else {
         try {
             await connectDb()
             await Product.create({
@@ -19,3 +21,4 @@ export default async function addProduct(req, res) {
 
         }
     }
+}
